@@ -1,21 +1,9 @@
-"""Pydantic schemas for request and response validation.
-
-These classes define the shape of data exchanged via the API.  They
-mirror the SQLAlchemy models but omit internal fields (such as
-foreign keys) and provide type hints for optional values.  Pydantic
-models can be used directly as response models in FastAPI endpoints
-to generate accurate OpenAPI documentation.
-"""
-
-from datetime import date
-from typing import List, Optional
-
 from pydantic import BaseModel
+from typing import Optional, List
 
 
 class SupplierOut(BaseModel):
-    id: int
-    name: str
+    name: Optional[str] = None
     address: Optional[str] = None
     phone: Optional[str] = None
     email: Optional[str] = None
@@ -26,8 +14,7 @@ class SupplierOut(BaseModel):
 
 
 class BuyerOut(BaseModel):
-    id: int
-    name: str
+    name: Optional[str] = None
     address: Optional[str] = None
     phone: Optional[str] = None
     gstin: Optional[str] = None
@@ -50,29 +37,31 @@ class LineItem(BaseModel):
 
 
 class InvoiceResponse(BaseModel):
-    id: int
-    invoice_no: Optional[str] = None
-    invoice_date: Optional[date] = None
-    subtotal: Optional[float] = None
-    tax_total: Optional[float] = None
-    grand_total: Optional[float] = None
-    status: str
-    supplier: Optional[SupplierOut] = None
-    buyer: Optional[BuyerOut] = None
-    lines: List[LineItem] = []
+    id:int
+    invoice_no: Optional[str]=None
+    invoice_date: Optional[str]=None
+    subtotal: Optional[float]=None
+    tax_total: Optional[float]=None
+    grand_total: Optional[float]=None
+    status:str
+
+    supplier: Optional[SupplierOut]=None
+    buyer: Optional[BuyerOut]=None
+
+    lines: List[LineItem]=[]
 
     class Config:
         orm_mode = True
 
 
 class UploadResponse(BaseModel):
-    invoice_id: int
-    task_id: str
+    invoice_id:int
+    task_id:str
 
 
 class ChatRequest(BaseModel):
-    question: str
+    question:str
 
 
 class ChatResponse(BaseModel):
-    answer: str
+    answer:str
