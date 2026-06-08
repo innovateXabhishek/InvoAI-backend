@@ -1,8 +1,10 @@
 from pydantic import BaseModel
 from typing import Optional, List
+from datetime import date
 
 
 class SupplierOut(BaseModel):
+    id: Optional[int] = None
     name: Optional[str] = None
     address: Optional[str] = None
     phone: Optional[str] = None
@@ -14,6 +16,7 @@ class SupplierOut(BaseModel):
 
 
 class BuyerOut(BaseModel):
+    id: Optional[int] = None
     name: Optional[str] = None
     address: Optional[str] = None
     phone: Optional[str] = None
@@ -37,31 +40,29 @@ class LineItem(BaseModel):
 
 
 class InvoiceResponse(BaseModel):
-    id:int
-    invoice_no: Optional[str]=None
-    invoice_date: Optional[str]=None
-    subtotal: Optional[float]=None
-    tax_total: Optional[float]=None
-    grand_total: Optional[float]=None
-    status:str
-
-    supplier: Optional[SupplierOut]=None
-    buyer: Optional[BuyerOut]=None
-
-    lines: List[LineItem]=[]
+    id: int
+    invoice_no: Optional[str] = None
+    invoice_date: Optional[date] = None
+    subtotal: Optional[float] = None
+    tax_total: Optional[float] = None
+    grand_total: Optional[float] = None
+    status: str
+    supplier: Optional[SupplierOut] = None
+    buyer: Optional[BuyerOut] = None
+    lines: List[LineItem] = []
 
     class Config:
         orm_mode = True
 
 
 class UploadResponse(BaseModel):
-    invoice_id:int
-    task_id:str
+    invoice_id: int
+    task_id: str
 
 
 class ChatRequest(BaseModel):
-    question:str
+    question: str
 
 
 class ChatResponse(BaseModel):
-    answer:str
+    answer: str
