@@ -4,9 +4,9 @@
 # processing, interact with a relational database, schedule background
 # tasks and work with environment variables.
 
-fastapi==0.136.3
+fastapi==0.111.0
 uvicorn==0.22.0
-pydantic==2.7.1
+pydantic==1.10.15
 SQLAlchemy==2.0.29
 psycopg2-binary==2.9.9
 python-dotenv==1.0.1
